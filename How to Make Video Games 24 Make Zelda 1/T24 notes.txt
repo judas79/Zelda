@@ -1,0 +1,20 @@
+How to Make Video Games 24 : Make Zelda 1
+https://www.youtube.com/watch?v=UJn6ePiUQr4&list=PLGLfVvz_LVvSYnwKyw9xP5tEn7GSUWwZJ&index=25
+
+This is the first part of my video series in which I will make a Legend of Zelda clone. 
+I get asked all the time to cover how to make pixel art, so I値l cover that first. 
+I値l show exactly how I drew Link and then I値l draw a ground sprite as well. 
+We値l also look at the finished sprite sheet I値l use for the game. 
+The sprite sheet is available here for free download.
+
+In the videos that follow I値l make a fully functioning Zelda clone. 
+It will be a ton of fun!
+http://www.newthinktank.com/2017/10/make-video-games-24/
+
+
+In this tutorial, we used Gimp and a picture of the main Zelda character 'Link', 
+and made a 16x16 sprite rendition, of it.  We also made some background flowers,
+for part of the background, for the game.
+
+Then in the Assets folder, we created a folder and named it Sprites, then downloaded the sprite sheet,
+in the link above, and dragged it in there.

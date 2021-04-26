@@ -1,0 +1,396 @@
+How to Make Video Games 25 : Make Zelda 2
+https://www.youtube.com/watch?v=un4wvPA9Gfs&list=PLGLfVvz_LVvSYnwKyw9xP5tEn7GSUWwZJ&index=25
+
+In this part of my Video Game Tutorial I’m going to setup all of my Zelda clones assets and create the entire board. 
+These techniques can be utilized to make games in multiple frameworks. In a future video I’ll also show you how to do this in a Unity centric way,
+using a program called the Tiled Map Editor.
+http://www.newthinktank.com/2017/10/make-video-games-25/
+
+All of the sprites are available here in a free download. Feel free to do what ever you want with them, 
+but be aware that most everything is based on a Nintendo property, 
+so I don’t own anything.
+http://www.newthinktank.com/16x16sprites-2/
+
+direct link:
+http://www.newthinktank.com/wp-content/uploads/2017/10/16x16Sprites.png
+
+
+****************************** general game setup *****************************
+
+********************************** Sprite setup *******************************
+
+If you haven't already, in Unity create a new 2d project, in the unity subfolder named Zelda.
+
+Within the Unity editor, in the Assets folder, create new folders:
+Animations
+Prefabs
+Scenes
+Scripts
+Sounds
+Sprites
+
+Drag the Dereks' 16x16Sprites sheet, into the Sprites folder.
+With the 16x16Sprites sheet selected, set the settings:
+sprite mode = multiple
+pixels per unit = 16
+filter mode = point
+compression = high quality
+
+Next in the 16x16Sprites sheet settings click the sprite editor, button.
+Click apply, for the popup.
+In the editor, click the second 'down arrow', select:
+Grid by cell size
+pixel size x = 16, Y = 16
+click slice
+Then click Apply
+Then close by clicking the 'X'
+
+
+********************************** Camera Setup ***********************************
+
+In hierarchy, select the Main Camera, and Settings:
+Size = 8
+This is dependant on the amount of pixels, which is 16x16
+
+For this game we want the Camera to be located at the bottom left of our screen:
+position x = -13
+position y = -5
+
+After reconsidering this; changed to:
+position x = 0
+position y = 0
+
+Leave backgoround the same for now.
+
+
+******************************** create empties *********************************
+
+Next we will create a bunch of empties, for all our sprites.
+We will create sorting layers, for these, later on.
+In hierarchy,
+Create Empty, rename to 'Hills'  (all of these, without quoates)
+Create Empty, rename to 'Trees'
+Create Empty, rename to 'Dirt'
+Create Empty, rename to 'Houses'
+Create Empty, rename to 'Trees'
+Create Empty, rename to 'Stones'
+Create Empty, rename to 'Weapon'
+Create Empty, rename to 'Link'
+Create Empty, rename to 'Villian'
+Create Empty, rename to 'Bushes'
+
+
+
+*********************************** Dirt prefab **********************************
+
+From our Sprites folder, drag the 16x16Sprite_10, into the Dirt object folder in hierarchy.
+We will create a Prefab out of it later.
+Rename it to Dirt10, keeping the 10 at the end,as reference, to the type of dirt, basic dirt, that it is.
+
+Make enough duplicates, of Dirt10 to make an outline of a rectangle, made from Dirt10, x = 23 by y = 28 in diameter.
+About 42 of them, in total.
+A cube = 16x16 pixels
+
+x = 27 dirt cubes wide
+________________________________
+|								|
+|								|
+|								|
+|                               |<- y = 23 dirt cubes
+|								|
+|								|
+|_______________________________|
+
+
+Place the firt row of dirt, starting at 0,0 then the second one, a duplictate, at 1,0 then continue to.... 23,0.
+Then start the column up from there 23, 1, to... 23, 28,
+Then, the next row from 22, 28 ... down to 0,28,
+Then start the column down, back to 0,1.
+
+We will set up a master game board array, later on, to put in place, where Link, the main character in Zelda,
+can travel, and where he can't, so we will leave the dirt settings positions x and y at 0.
+
+
+**************************************** setup Grass ************************************
+
+
+In the sprites folder select 16x16sprite_15 and drag it into your Grass Empty folder in Hierarchy, and rename to Grass15.
+Put it in position 0,0.
+
+In the sprites folder select 16x16sprite_16 and drag it into your Grass Empty folder in Hierarchy, and rename to Grass16.
+put it in position 1,0.
+
+Create Empty name it Bushes, and set position to 0,0.
+In the sprites folder select 16x16sprite_16 and drag it into your Bushes Empty folder in Hierarchy, and rename to Grass16.
+Set position to 2.5, 0.
+
+IT IS BEST TO HAVE THE SPRITES ASSIGNED TO A SORTING LAYER BEFORE CREATING PREFABS!
+In this lesson, I made the prefabs, then had to assign the sorting layers afterward, 
+one at a time, instead of selecting the prefab empty.  Pain in the ass.
+Duplicate it, and in the duplicate put a check mark next to the Flip x, to flip the image.
+Set position to: 1.5, 0.
+Then drag the Bushes Empty, into the prefab folder.
+Now drag that Bushes prefab into the Grass Empty, and align it next to the first bush we made, with Grass15 and Grass16.
+
+Duplicate Bushes until you have a total of 5 whole ones, and the corner one, then add a half of a bush (flipped x Grass16) at the end.
+See picture in ..... How to make video Games 25 .... folder.
+
+WE will now MOVE EVERYTHING IN GRASS INTO THE HILLS Empty folder.
+
+
+****************************************** Hills setup ************************************
+
+Select everything in the Grass Empty and drag it into the Hills Empty.  The tutorial admin changed his mind, of where he wanted them.
+The Grass Empty Object should be now, empty.
+
+We will start working our way up the y axis on the left bottom side of our dirt.
+
+Next, lets drag 16x16sprite_45 into the Hill empty, and rename to Grass45. Setting:
+Position 0, 1
+Duplicate it, and setting
+position 0, 2
+
+Next, lets drag 16x16sprite_38 into the Hill empty, and rename to Grass38. Setting:
+position 0, 3
+
+Next, lets drag 16x16sprite_39 into the Hill empty, and rename to Grass39. Setting:
+position 1, 3
+
+Duplicate Grass39 5 times
+Position x = 2 ++1
+position y = 3  for all
+
+We will start working our way up the y axis, from where we left off with our bushes.
+
+Dulicate Grass15, and set Flip x checked:
+position 0,10
+
+Duplicate Grass45 set flip x
+position 10,1
+
+Duplicate Grass45 7 more times and position it at x = 10, and y = ++1
+
+We need and edge, for the hedge that is pointed from the left side to the middle ending in a duplicate of Grass39.
+
+Next, lets drag 16x16sprite_36 into the Hill empty, and rename to Grass36. Setting:
+position 0, 3
+
+You should now have 'T25 dirt and grass 3.png' look at this picture in the tutorial 25 folder.
+
+Next, on our own, we need to fill it in ourselves, so that it looks like the two images ...T25 dirt and grass 3.png.
+
+
+
+*********************************** sorting layers **************************************
+
+
+First, we will make a whole bunch of sortings layers, so that layers, at the bottom,
+are covered up, by layers, on the top, if any.
+
+Select one of the Grass sprites within Hills, and click on Sorting Layer,
+then choose Add sorting layer, from the drop down.  
+Hit the + button to add the following list of layer components, in this order:
+
+Dirt
+Grass
+Hill
+Tree
+House
+Stone
+Weapon
+Villian
+Link
+
+Next, select all those sprites, in the Hills in hierarchy, including all those grass sprites,
+and in the sorting layer dropdown select Hills.
+If you made prefabs, Select the prefabs, some at a time, or all of them, then right click and choose,
+select children, then with CTrl pressed, click all the parent folders (prefab roots),
+and you will get the sorting property, for that selected children, to chose your sorting layer.
+
+Do the same for the Dirt Empty(s), contents, but set the sorting layer to Dirt.
+
+
+********************************* Grass area ********************************
+
+
+Next, lets drag 16x16sprite_25 into the Hill empty, and rename to Grass25. Setting:
+Sorting Layer = Hill
+position 0, 4
+Fill in that peninsula area with this Grass
+
+Do the same with Grass25 starting at:
+position 14,0
+and work your way up.
+
+
+Next we will fill in dirt, see pic 'T25 where grass is going to be 5'.
+Fill in dirt, in the areas as shown in the image
+Next, lets drag 16x16sprite_20 into the Grass empty, and rename to Grass20. Setting:
+Sorting Layer = Grass
+position 12,3
+
+Next, lets drag 16x16sprite_30 into the Grass empty, and rename to Grass30. Setting:
+Sorting Layer = Grass
+position 13,3
+
+Next we will fill in the empty areas, in the dirt with this grass.
+Next, lets drag 16x16sprite_83 into the Grass empty, and rename to Grass83. Setting:
+Sorting Layer = Grass
+position 10, 8
+
+
+
+***************************** more dirt and hills bottom right corner *************************
+
+
+Fill the bottom right corner, with more dirts, at an angle, kinda like this:  /| 
+Then we will fill that area in with:
+Grass20
+Grass30
+Grass83
+
+Stayin on the right side, of our game play area, we will add two rows of Hills.
+See "T25 Two hills on right side 5.png"
+
+Next, on the right side of our game we will create two ridgeses of hills,
+parallel to each other horrizontally, but slightley different from one another,
+starting with Grass36, the right edge of the lower, ridge.
+
+
+********************************* setup trees **********************************
+
+Next, we will put some sprites together, to create a tree prefab.
+First, in the Trees empty, Create Empty, inside of Trees, where we will drag our sprites into.
+Name the child Empty Tree.
+Lets drag in:
+16x16sprite_18 
+16x16sprite_19 
+16x16sprite_28 
+16x16sprite_29 
+into the TreeSprite empty, and rename the sprites to:
+Tree18
+Tree19 
+Tree28
+Tree29
+Select all 4 of these, setting
+Sorting Layer = Tree
+Verify, that the Trees, and Tree Empties, are set to 0,0.
+Set the positions for the 4 Tree Sprites, to make a tree, from the four parts.
+Tree18 0,1
+Tree19 1,1
+Tree28 0,0
+Tree29 0,1
+Select the Tree empty and drag them into the prefab folder, then delete the Tree empty,
+and drag the Tree Prefab back into the Treees empty.
+
+Next, drag your tree, to the top right side of our gaming are, make a copy of it, and put it,
+to the left of that first one.  My positions are:
+24,19
+19,22
+16,22
+As everything in the land map, put it where it looks good...
+
+
+*********************************** leaves, stumps, flowers and rocks as dirt *************************************
+
+
+Next we will add leaves, to the Dirt empty, as well as the Dirt sorting layer.
+Next, lets drag 16x16sprite_12 into the Dirt empty, and rename to Dirt12. Setting:
+Position 2, 2
+
+Next we will add stumps, to the Dirt empty, as well as the Dirt sorting layer.
+Next, lets drag 16x16sprite_14 into the Dirt empty, and rename to Dirt14 Setting:
+Position 3, 2
+Duplicate Dirt14 twice, and put them to the right of eachother; 3 on a row.
+
+Next we will add rocks, to the Dirt empty, as well as the Dirt sorting layer.
+Next, lets drag 16x16sprite_17 into the Dirt empty, and rename to Dirt17 Setting:
+Position 11, 1
+Duplicate and set at position:
+6,7
+
+Next we will add flowers, to the Dirt empty, as well as the Dirt sorting layer.
+Next, lets drag 16x16sprite_11 into the Dirt empty, and rename to Dirt11 Setting:
+Position 4,10
+
+Duplicate these 4 sprites and set them at spread out positions, on the game play area.
+See this image for reference:
+T25 flowers rocks stumps leaves spread out.png
+
+
+******************************** Houses **************************************
+
+
+First we will rename our empty to Houses, so we can now create a child, Create Empty,
+named House.
+Then we will drag into the House child folder:
+16x16sprite_22
+16x16sprite_23
+16x16sprite_24
+16x16sprite_32
+16x16sprite_33
+16x16sprite_34
+16x16sprite_42
+16x16sprite_43
+16x16sprite_44
+
+rename them to:
+Name:    Position:
+House22  0,2
+House23  1,2
+House24  2,2
+House32  0,1
+House33  1,1
+House34  2,1
+House42  0,0
+House43  1,0
+House44  2,0
+
+Select all 9 of them, and set sorting layer to, House.
+Next we will assemble the house by areanging the 6 peices, into a house.
+coordinates are above.
+
+Select the House Empty and move the house to positions:
+20, 12
+
+See image to see house location:
+T25House.png
+
+
+*************************** the rest of the dirt, weapons, stairs, bushes ***************************
+
+Next fill in all of the empty space, in your game map, with dirt, but leave one square of dirt,
+on the right side of your house, out.  This is where er eill put the stair.
+
+Next we will add Stairs, to the Dirt empty, as well as the Dirt sorting layer.
+Next, lets drag 16x16sprite_50 into the Dirt empty, and rename to Stairs50 Setting:
+Position 26, 11, on my personal map.
+
+Next we will add a Stone, to the Stones empty, as well as the Stone sorting layer.
+Next, lets drag 16x16sprite_84 into the Stones empty, and rename to Stone84 Setting:
+Position 26, 11.
+Yes, it covers the Stairs, until someone breaks or moves it.
+
+Next we will add a Bush, to the Bushes empty, as well as the Bush sorting layer.
+Next, lets drag 16x16sprite_6 into the Bushes empty, and rename to Bush6 Setting:
+Click on the stumps, to get thier positions.
+Create a sorting later, call it Bush, and put it after Tree, in the sorting layer, hierarchy drop down.
+Next, put the Bushes, one at a time, on top of the Stumps, we put in earlier, at the same,
+vectors as the stumps.
+
+
+Next we will add a boomarang, to the Weapons empty, as well as the Weapon sorting layer.
+Next, lets drag 16x16sprite_49 into the Weaponss empty, and rename to Boomarang49 Setting:
+Position 8, 11.
+
+Next we will add a bomb, to the Weapons empty, as well as the Weapon sorting layer.
+Next, lets drag 16x16sprite_74 into the Weaponss empty, and rename to Bomb74 Setting:
+Position 1, 17.
+
+Next we will add a Bow and Arrow, to the Weapons empty, as well as the Weapon sorting layer.
+Next, lets drag 16x16sprite_78 into the Weaponss empty, and rename to Bow74 Setting:
+Position 23, 4.
+
+Last, we will select our Main Camera, and change the backround color setting:
+background = 55A154
+

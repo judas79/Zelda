@@ -1,0 +1,133 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+// Used so I can use Floor
+using System;
+
+public class Gameboard : MonoBehaviour
+{
+
+    // Holds all game objects
+
+    // TODO Remember to change space under rock to stairs
+    // after rock is moved
+    // TODO Change to Gem and then Stump after the bush is moved
+    // Do the same for Boomarang, Bomb, Bow, Vace
+
+    // Types of objects Hill, Tree, Bush, House, Boomarang,
+    // Bomb, Stone, Bow, Vace, Gem, Stairs, Door, Chest
+    public string[,] gameObjects = new string[29, 26];
+    
+    // Use this for initialization
+    void Start()
+    {
+        
+        // Add all game objects to array
+        AddYRowXRange(0, 0, 28, "Hill");
+        AddYRowXRange(24, 0, 28, "Hill");
+        AddYRowXRange(3, 0, 7, "Hill");
+        AddYRowXRange(4, 0, 7, "Hill");
+        AddYRowXRange(5, 0, 7, "Hill");
+        AddYRowXRange(6, 0, 6, "Hill");
+        AddYRowXRange(9, 10, 12, "Hill");
+        AddYRowXRange(10, 12, 13, "Hill");
+        AddYRowXRange(13, 0, 10, "Hill");
+        AddYRowXRange(14, 3, 4, "Hill");
+        AddYRowXRange(14, 8, 9, "Hill");
+        AddYRowXRange(20, 0, 6, "Hill");
+        AddYRowXRange(20, 10, 12, "Hill");
+        AddYRowXRange(21, 1, 2, "Hill");
+        AddYRowXRange(21, 3, 4, "Hill");
+        AddYRowXRange(21, 5, 6, "Hill");
+        AddYRowXRange(21, 11, 12, "Hill");
+        AddYRowXRange(21, 13, 14, "Hill");       
+        AddYRowXRange(17, 17, 26, "Hill");
+        AddYRowXRange(16, 17, 26, "Hill");
+        AddYRowXRange(10, 18, 24, "Hill");
+        AddYRowXRange(9, 17, 25, "Hill");
+        AddYRowXRange(8, 17, 25, "Hill");
+        
+        AddXColYRange(0, 0, 24, "Hill");
+        AddXColYRange(13, 0, 19, "Hill");
+        AddXColYRange(14, 0, 19, "Hill");
+        AddXColYRange(15, 0, 19, "Hill");
+        AddXColYRange(28, 0, 24, "Hill");
+        
+        AddYRowXRange(22, 16, 17, "Tree");
+        AddYRowXRange(23, 16, 17, "Tree");
+        AddYRowXRange(22, 19, 20, "Tree");
+        AddYRowXRange(23, 19, 20, "Tree");
+        AddYRowXRange(20, 24, 25, "Tree");
+        AddYRowXRange(19, 24, 25, "Tree");
+
+        AddYRowXRange(2, 3, 5, "Bush");
+        AddYRowXRange(23, 24, 25, "Bush");
+        AddXColYRange(1, 8, 10, "Bush");
+        AddXColYRange(19, 1, 1, "Bush");
+        AddXColYRange(21, 3, 3, "Bush");
+        AddXColYRange(23, 5, 5, "Bush");
+
+        AddXColYRange(20, 12, 14, "House");
+        AddXColYRange(21, 13, 14, "House");
+        AddXColYRange(22, 12, 14, "House");
+
+        // Place single game objects
+        gameObjects[8, 11] = "Boomarang";
+        gameObjects[1, 17] = "Bomb";
+        gameObjects[26, 11] = "Stone";
+        gameObjects[23, 4] = "Bow";
+        gameObjects[21, 12] = "Door";
+
+        // Add Link to Scene
+        // Drag 53 & 54 to Scene call Animation Idle
+        // Rename GameObject Link and drag into Link
+        // Empty. Set Empty to X0 Y0 and Link to X1 Y1
+        // Change Link Sorting Layer to Link
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    // Adds game object name to array using rows
+    void AddYRowXRange(int yRow, int xStart, int xEnd, string gOName)
+    {
+        for (int i = xStart; i <= xEnd; i++)
+        {
+            gameObjects[i, yRow] = gOName;
+        }
+    }
+
+    // Adds game object name to array using columns
+    void AddXColYRange(int xColumn, int yStart, int yEnd, string gOName)
+    {
+        for (int i = yStart; i <= yEnd; i++)
+        {
+            gameObjects[xColumn, i] = gOName;
+        }
+    }
+
+    public bool IsValidSpace(float x, float y, float horzMove, float vertMove)
+    {
+
+        x = horzMove < 0 ? x + 1 : x;
+        y = vertMove < 0 ? y + 1 : y;
+
+        x = (float)Math.Floor(Convert.ToDouble(x));
+        y = (float)Math.Floor(Convert.ToDouble(y));
+
+        if (gameObjects[(int)x, (int)y] == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+}

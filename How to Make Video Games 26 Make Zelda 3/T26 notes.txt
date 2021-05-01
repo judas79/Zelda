@@ -1,0 +1,197 @@
+How to Make Video Games 26 : Make Zelda 3
+https://www.youtube.com/watch?v=Jey2syhyIEQ&list=PLGLfVvz_LVvSYnwKyw9xP5tEn7GSUWwZJ&index=26
+
+In this part of my How to Make Video Games Tutorial we’ll cover how to animated Link, 
+moving Link, creating a game board array, and numerous other things. 
+Here is a link to the Sprite Sheet I’m using.
+http://www.newthinktank.com/16x16sprites-2/
+
+I decided to show 2 ways to create Link and the game board to show the positives and negatives of both. 
+Below you’ll find all the code used in this tutorial. Feel free to do what ever you’d like with it.
+http://www.newthinktank.com/2017/10/make-video-games-26/
+
+
+**************************************** setup link Idle **********************************************
+
+
+Make sure your link empty positions are set to 0, 0
+Then, select sprites 
+16x16sprites53
+16x16sprites54
+from te sprites folder, and drag them into our scene window.
+Change the address of the animation, popup window folder, to the Animations folder.
+Then save the animation as name 'Idle.' anim.
+Drag the 16x16sprites53, now in the hierarchy list, into the Link empty.
+Rename it to Link.
+Change its sorting layer to Link.
+Position 1, 1
+
+While Link, is still selected, click on our animator editor.
+Then select the orange rectangle, Idle
+Change the speed setting, down so Link animation doesn't wiggle so fast. 
+speed = .2
+
+Next, go back to the scene window, and in the hierarchy list select the character, Link.
+Add a rigidBody 2d to link.
+Settings:
+Gravity = 0
+collision detection = continous
+constraint freeze rotation z axis checked
+mass = .0001
+
+Next, click on the animations folder.
+Change the name from 16x16sprites53 to Link.
+Link, is the controller and the other file, Idle, is the animation.
+The controller, is what yous see in the Animator editor window, and
+Idle, is the animation you see in the Scene window.
+
+
+********************************** setup Link WalkDown **********************************
+
+THERE MAY BE A SORTING LAYER HERE, SET TO DEFAULT INSTEAD OF LINK
+Make sure your link empty positions are set to 0, 0
+Then, select sprites 
+16x16sprites53
+16x16sprites54
+16x16sprites55
+from the sprites folder, and drag them into our scene window.
+Change the address of the animation, popup window folder, to the Animations folder.
+Then save the animation as name 'WalkDown.' anim.
+In the animation folder delete the controller, '16x16sprites53'
+Delete the 16x16sprites53, now in the hierarchy list.
+
+Drag the WalkDown contoller, from the Animation folder, into the Animator Editor.
+This will give the WalkDown controller the ability to walk down.
+Change the WalkDown speed to .2
+Next, in the Animator, we will define a 'parameter' int and name it MoveDir, set to 0 as default.
+0 will be idle,
+4 - down
+1 - left
+3 - right
+2 - up
+Next, in the animator, we will 'make transition' line, between Idle and WalkDown.
+This will used to define when we go from Idle to the WalkDown state.
+To set the parameters, for this, in setting, click the three horrisontal lines to expand the,
+Idle > Walkdown options.  Then Under the Conditions heading, click the + to add the condition,
+of when to move from Idle to WalkDown.  Conditions Setting:
+MoveDir Equals 4.
+
+Next, in the animator, we will 'make transition' line, between WalkDown and Idle.
+This will used to define when we go from the WalkDown state to Idle.
+To set the parameters, for this, in setting, click the three horrisontal lines to expand the,
+Idle > Walkdown options.  Then Under the Conditions heading, click the + to add the condition,
+of when to move from  WalkDown to Idle.  Conditions Setting:
+MoveDir Equals 0.
+
+
+********************************* setup walking right *******************************
+
+
+Next, we will select:
+16x16sprites51
+16x16sprites52
+Drag them into the scene window.
+Change the address of the animation, popup window folder, to the Animations folder.
+Then save the animation as name 'WalkRight.' anim.
+Change the sorting layer to Link.
+In the animation folder delete the controller, '16x16sprites51'
+Delete the 16x16sprites51, now in the hierarchy list.
+We will use WalkRight to walk left, in code.
+Drag the WalkRight contoller, from the Animation folder, into the Animator Editor.
+This will give the WalkRight controller the ability to walk right.
+Change the WalkRight speed to .2
+
+Next, in the animator, we will 'make transition' line, between Idle and WalkRight.
+This will used to define when we go from Idle to the WalkRight state.
+To set the parameters, for this, in setting, with the transition line selected, 
+click the three horrizontal lines to expand the field,
+Idle > WalkRight options.  Then Under the Conditions heading, click the + to add the condition,
+of when to move from Idle to WalkRight.  Conditions Setting:
+MoveDir Equals 3.
+
+Next, in the animator, we will 'make transition' line, between WalkRight and Idle.
+This will used to define when we go from the WalkRight state to Idle.
+To set the parameters, for this, in setting, click the three horrisontal lines to expand the,
+Idle > WalkRight options.  Then Under the Conditions heading, click the + to add the condition,
+of when to move from  WalkRight to Idle.  Conditions Setting:
+MoveDir Equals 0.
+
+********************************* setup walking up *******************************
+
+Next, we will select:
+16x16sprites56
+16x16sprites57
+16x16sprites58
+Drag them into the scene window.
+Change the address of the animation, popup window folder, to the Animations folder.
+Then save the animation as name 'WalkUp.' anim.
+Change the sorting layer to Link.
+In the animation folder delete the controller, '16x16sprites56'
+Delete the 16x16sprites56, now in the hierarchy list.
+
+Drag the WalkRight contoller, from the Animation folder, into the Animator Editor.
+This will give the WalkRight controller the ability to walk right.
+Change the WalkRight speed to .2
+
+Next, in the animator, we will 'make transition' line, between Idle and WalkRight.
+This will used to define when we go from Idle to the WalkRight state.
+To set the parameters, for this, in setting, click the three horrizontal lines to expand the,
+Idle > WalkRight options.  Then Under the Conditions heading, click the + to add the condition,
+of when to move from Idle to WalkRight.  Conditions Setting:
+MoveDir Equals 3.
+
+Next, in the animator, we will 'make transition' line, between WalkRight and Idle.
+This will used to define when we go from the WalkRight state to Idle.
+To set the parameters, for this, in setting, with the transition line selected, 
+click the three horrizontal lines to expand the field,
+Idle > WalkRight options.  Then Under the Conditions heading, click the + to add the condition,
+of when to move from  WalkRight to Idle.  Conditions Setting:
+MoveDir Equals 0.
+
+
+************************** set up gameboard and gameboard array *****************************
+
+// TODO if there on errors for 'Bush' some where entered with the same start and end point values!
+Ceate Empty - Gameboard
+set Positions to 0, 0
+
+Create script - Gameboard
+The Gameboard script will contain mostly utility functions.
+Add to the top:
+// Used so I can use Floor
+using System;
+Double click it ad we will continue in VS...
+
+The placement of all of the objects was set for my array, at 28 x 24 as the array size.
+The individual objects mapping is in the Gameboard.cs script.
+
+After saving, return from VS.
+
+
+
+********************************** setup link ************************************
+
+
+First create a script named Link.
+Drag the Link script into the Link object in hierarchys setting area.
+Next, double click the Link script and continue there...
+Add to Link.cs
+// T26 Used so I can use Floor and round values
+using System;
+
+After adding SoundManager to our Definitions in Link.cs, we noticed that it had not yet been created.
+So, in hierarchy create empty, name it SoundManager.  From the add component option,
+in settings, add an 'AudioSource' to SoundManager.
+Then create a SoundManager script.
+
+Next return to our Link.cs in VS and continue...
+
+After saving, and returning after setting up the Link.cs, we will run it,
+to verify it works.
+
+Needs fixing...
+
+Select link from hierarchy and go to settings, set 
+speed = 5
+
+Select the Gameboard in hierarchy, and drag the Gaimboard script into its settings.

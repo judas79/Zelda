@@ -1,0 +1,16 @@
+
+
+
+
+
+
+
+Thank you for the tutorial. i hoped to see you implement simple behaviors on enemy like chasing and attacking Link, though. 
+Kind of curious on your approach.
+
+Derek Banas
+I figured that would be good homework. Have the villain check to see if Link has a x and y position within range of the villains x and y position. 
+If true then have the villain go to Links position. If Link runs away from the villain check for Links closest node and go there and there to Link. 
+Have the villain attack in the same way Link attacks. I hope that helps
+
+Blender tutorials are next...

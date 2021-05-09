@@ -53,6 +53,9 @@ TagManager:
   - name: Tree
     uniqueID: 840895913
     locked: 0
+  - name: Gem
+    uniqueID: 3626461927
+    locked: 0
   - name: Bush
     uniqueID: 2357066715
     locked: 0

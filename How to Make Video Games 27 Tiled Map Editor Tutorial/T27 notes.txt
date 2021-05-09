@@ -1,0 +1,304 @@
+How to Make Video Games 27 : Tiled Map Editor Tutorial
+https://www.youtube.com/watch?v=by55k4lPMhw&list=PLGLfVvz_LVvSYnwKyw9xP5tEn7GSUWwZJ&index=27
+
+In this part of my Video Games Tutorial we will continue to design our Zelda clone, but this video is also a stand alone tutorial. 
+We’ll be taking a look at how the Tiled Map Editor can make it easy to design levels. We’ll then bring those levels into Unity with Tiled2Unity. 
+As an added bonus I’ll show you a quick way to fix Sprite Tearing.
+http://www.newthinktank.com/2017/10/make-video-games-27/
+
+
+
+First, we will disable antaliasing, to help Link, not get caught up on things, in our gameboard.
+Click, Edit, Project settings, Quality and disable Anti Aliasing.
+
+
+***************************************** Download and install Tiled and Tiled2Unity ******************************************
+
+
+Download Tiled:
+https://www.mapeditor.org/download.html
+
+Install
+
+Next, dowload Tiled2Unity:
+https://seanba.com/tiled2unity.html
+Install
+
+Run Tiled.
+
+
+
+************************************************** use Tiled app ************************************************
+
+
+
+Open app, and click New Map.  Settings:
+Orthogonal:  working with squares, rectangles, at right angles.
+CSV
+The render order : left up, starts on the left and works its way up.
+
+Map size:
+Width:28  Set to the amount, you want your maps width to be.
+Hieght: 24
+
+Tile Size
+pixel width: 16 px
+pixel heigth: 16 px
+
+Save_as ZeldaMap, in Zelda Assets folder.
+
+Next we will work on tile layers.  The top one is on the highest layer.
+Click The layer 1, on the right, and a properties box will show on the right of the grid.
+Rename tile layer 1, to Trees.
+
+We will create more layers.
+Click the star surrounded by yellow, on the right of the app, and choose tile layer.
+Then on the left side, rename tile layer 2 to: Houses
+Drag Houses below Trees, on the right...
+
+Do the same thing over and over and create layers for:
+Hills
+Grass
+Dirt
+
+In this order, in the Tile app.:
+Trees
+Houses
+Hills
+Grass
+Dirt
+
+Next, go to the bottom left side, and find the other star with yellow around it, and creat a new Tileset - tiled.
+Name it TiledSheet.
+Based on Tileset image
+Check that these are your settings:
+size 16 x 16
+Margins 0 x 0
+Then, click the Source, Browse Button.
+Then we need to go to the folder where we stored out 16x16Sprites, the sheet of pixel art, that Derek made.  
+Mine is in my Assets, Sprites folder.
+The other settings should all be unchecked.
+Select the sprite sheet and open.
+Click save_as and save in the same place you saved the zelda map, but first name it TiledSheet.
+
+Zoom in under, View, zoom in, to your TiledSheet.
+We will define the collision borders area, for the sprites.
+Verify your in the TiledSheet.tsx tab area.
+
+Under View, click views and toolbar, and select 'the collision editor.
+the collision editor should be on the left, of your sprites.
+select the top sprite, of the green bushes 16x16 pixel, and expand its size in the collision editor.
+Use the triangular polygon tool to outline the spite that is shaped kind of like this, selecting the collidable area:
+ _
+|_\
+
+Do this for all the green Hills (bushes).  It does NOT have to follow the edges, of the shadow edges perfectly.
+
+For the Trees, do not put a collider around the top two green parts of the tree, 
+we will use this so Link can go behind the tree and give it a 3d feel.
+
+The House; we will not put a collider around the door, and also leave one space,
+on the sides of the walls, that are part of the door jam area, on each side, giving the doorway more space, 
+for Link to enter it, without getting jammed up, in the doorway.  Do not put a collider on the door to the house.
+
+Do not put colliders on things we are going to interact with, such as weapons, dirt, or characters.
+
+
+******************************************** Zelda Map.tmx ***************************************
+
+
+First click the Zelda Map.tmx, then we will start adding layers, for our Unity map layout.
+Next, click the Trees layer, in the list at the right of the grid.
+Then, at the bottom left click the + to add some properties, to our Trees layer.
+In the popup type unity:layer then make sure its a string, then click ok.
+Under the Custom properties on the left side of the grid name your unity:layer layer Trees,
+in the empty field.
+Next, with Trees still selected on the right, in the layers paine, 
+click the + to add some properties, to our Trees layer, and name this,
+unity:sortingLayerName.
+string
+then press ok.
+In the empty field, name the layer Trees, also.
+
+We, will make these two properties for all of our layers, but give them the layers name, according to what layer it is.
+The next two properties for houses will be:
+unity:layer   Houses
+unity:sortingLayerName Houses
+You need to also make:
+Hills
+Grass
+Dirt
+
+
+**************************************** Fill in the Dirt layer **************************************
+
+
+We will first fill in our Dirt area, with the mostly plain brown square Sprite, by selecting it, 
+then click the Bucket Fill tool.
+Its the second one down from the top left of our sprite sheet.
+
+Next, we will select the next 3 sprites, to the plain dirt, and the two sprites that are brown, 
+that are in a vertical alignment.
+We could then use the random tool (two dice) to insert them, or you can insert them one at a time, artfully,
+or use the stamp tool, to insert some, at a time.
+
+We will also insert, just a FEW tree stumps, in small rows of 2 - 4.
+Also, insert 1 stairs going down, in the map.
+
+Next we will start at one corner and put bushes all along the four sides of our parameter of our map,
+so it will look good with our background color, that will be the same color.
+
+So, start with the square green Hills sprite at the left corner then put the hill sprite,
+at the top of the hill sprites, above it.  Then the sprite, next to it in our spritesheet,
+to the right of, that.  Then put another of the second sprite we used, under that one.
+Put another one of those next to that one, and push x to flip it, z to turn them clockwise.
+
+Next put the grass in there.
+
+
+
+****************************************** the House, Tree ***********************************
+
+
+Next put the house on your map, starting with the bottom right, and omitting the door.  Just leave the spot,
+where the door goes, empty.  Fill in the rest of the house as it is, in the sprite sheet.
+
+Next, select all 4 sprites that make up the Tree, and make the trees, all at once.
+
+See picture T27 the rest of the map setup.png
+
+
+
+*********************************** setup Scene Unity Export Tiled to Tiled2Unity *********************************
+
+
+First, create a new scene and name it NewMap, in Unity.
+Then, double click to open it.
+
+Check that the camera in your new scenes size, is set the same as, your other scene.
+Size = 5
+
+Next, in assets, create a Maps folder.
+
+Next, in the Tiles app., File, save_file to our Maps folder, in Unity, as ZeldaMap.
+
+Next, in Unity, in the Maps Scene, we will import our ZeldaMap, resources. 
+From main menu:
+Assets, Import Package, Custom Package, then navigate to program files in the Tiled2Unity folder, 
+selectTiled2Unity.unitypackage then press open, to import.
+Then, in the popup with all the things to import, checked, click Import.
+Now, we will have an asset folder named, Tiled2Unity.
+
+
+Next, we will open up Tiled2Unity.exe, located in your program files, Tiles2Unity folder.
+Under Files, we will open our tiledfile... ZeldaMap, that we saved in our Assets, Maps folder.
+Hopefully you ge 0 warnings 0 errors in the Ouput window.
+In the Pixels Per Unit field put : 16
+Now yu can click preview map, to see it.  Then close it after viewing it.
+Click Help, Import Unity to Project and click on that.
+In Unity select import, for those files as well.  
+Make sure you import, before proceeding!
+
+Next, click the Export To... button, to open the file, we saved earlier in the Assets, Tiled2Unity folder,
+named Tiled2Unity.export file, then click Open.
+Then click the big ass export button, and check that Tiled2Unity is in you asssets folder.
+
+I got 6 errors..., because I didn't import before procceeding, 
+and changed my layer names, from plural to singular but still got the errors below.
+Layer 'Dirt' is not defined for 'ZeldaMap/Dirt'. Check project settings in Edit->Project Settings->Tags & Layers
+Layer 'Grass' is not defined for 'ZeldaMap/Grass'. Check project settings in Edit->Project Settings->Tags & Layers
+Layer 'Hills' is not defined for 'ZeldaMap/Hills'. Check project settings in Edit->Project Settings->Tags & Layers
+Layer 'Houses' is not defined for 'ZeldaMap/Houses'. Check project settings in Edit->Project Settings->Tags & Layers
+Sorting Layer "Trees" does not exist. Check your Project Settings -> Tags and Layers
+Layer 'Trees' is not defined for 'ZeldaMap/Trees'. Check project settings in Edit->Project Settings->Tags & Layers
+The object you are trying to replace does not exist or is not a Prefab.
+Imported prefab 'Assets/Tiled2Unity/Prefabs/ZeldaMap.prefab' from 'Assets/Tiled2Unity/Imported/ZeldaMap.tiled2unity.xml' with 0 warnings and 6 errors.
+Layer 'Dirt' is not defined for 'ZeldaMap/Dirt'. Check project settings in Edit->Project Settings->Tags & Layers
+Layer 'Grass' is not defined for 'ZeldaMap/Grass'. Check project settings in Edit->Project Settings->Tags & Layers
+Layer 'Hills' is not defined for 'ZeldaMap/Hills'. Check project settings in Edit->Project Settings->Tags & Layers
+Layer 'Houses' is not defined for 'ZeldaMap/Houses'. Check project settings in Edit->Project Settings->Tags & Layers
+Sorting Layer "Trees" does not exist. Check your Project Settings -> Tags and Layers
+Layer 'Trees' is not defined for 'ZeldaMap/Trees'. Check project settings in Edit->Project Settings->Tags & Layers
+
+UnityEngine.Debug:LogError(Object)
+Tiled2Unity.ImportBehaviour:ReportPrefabImport(String) (at Assets/Tiled2Unity/Scripts/Runtime/ImportBehaviour.cs:198)
+Tiled2Unity.ImportTiled2Unity:PrefabImported(String) (at Assets/Tiled2Unity/Scripts/Editor/ImportTiled2Unity.Prefab.cs:37)
+Tiled2Unity.TiledAssetPostProcessor:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets/Tiled2Unity/Scripts/Editor/TiledAssetPostProcessor.cs:103)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[])
+
+Go into the Assets Tiled2Unity prefab folder and drag your ZeldaMap into hierarchy, under the MainCamera.
+My first try, I had a blank empty space, where the map should be, because I had not imported, as instructed above,
+before continuing.  All is good now.
+
+
+********************************* repair zelda map ***************************************
+
+The Zelda map looks correct, but is missing key elements in Hierarchy,
+but I will continue, and make alterations, to hopefully be able to use it.
+
+First, we will assign the objects to the proper sorting layers in Unity.
+Select dirt, in hierarchy, and then select the spite within it, and set its sorting layer to Dirt.
+Do the same for the other objects under hierarchy, with there matching sorting layers.
+
+Mine was missing some of the sprites, in the objects, except for the Hills, which was named Dirt,
+and Trees.  So I renamed the Dirt to Hill, and Hill to Dirt, and left the Dirt and Grass objects,
+as they where, without a sprite in them; so no collider 2d either, which should be ok, because they are at,
+the bottom layers.
+
+The House, I rebuilt larger than the one rendered, in the Zelda map, since the Zelda map vectors,
+are off by .5.  Then add a collider 2d to the house sprites.
+
+
+
+************************************** add objects to Hierarchy **********************************
+
+
+First, in hierarchy, add create object, and name Gems, and position it to 0,0.  Make more for:
+Bushes
+Weapons
+Link
+Houses
+Stones
+
+Drag 16x16Sprites_73 into the Gems folder, rename it to Gem, then drag it into Prefab.
+Make 8 more duplicates of it.
+
+Drag 16x16Sprites_6 into the Bushes folder, rename it to Bush, then drag it into Prefab.
+Make 8 more duplicates of it.
+
+Drag 16x16Sprites_43 into the Weapons folder, rename it to Boomarang, then drag it into Prefab.
+Drag 16x16Sprites_74 into the Weapons folder, rename it to Boomb, then drag it into Prefab.
+Drag 16x16Sprites_77 into the Weapons folder, rename it to Bow, then drag it into Prefab.
+
+Drag 16x16Sprites_43 into the Houses folder, rename it to Door, then drag it into Prefab.  
+(I made mine earlier using 2 doors.  Renamed them both to Door, the made the prefab for each of them)
+
+Drag 16x16Sprites_83 into the Stones folder, rename it to Stone, then drag it into Prefab.
+
+
+
+********************************** Lay objects into Map **********************************
+
+
+First, create a sorting layer for Gem select all the Gem prefabs in the Gems folder and set them to the Gem sorting layer.
+Drag the Gem sorting layer above the Tree layer.
+
+Next, set the Zelda map to 0.5, 17.5. ( I had to re-arrange the house I created earlier, because of the zelda map vector change)
+
+Set the camera position to 6 x 4.
+
+Put all the Gems upon all of the stumps; one gem each.
+Put all the Bushes upon all of the gems; one bush each.  Make sure all Bush prefabs are in the Bush sorting layer.
+
+Next, drag the Boomarang to position 10, 13.
+Set boomarangs, and the other weapons, sorting layer to weapon.
+Drag bomb to position 13, 14
+Drag bow to position 26, 0
+
+Next, put the door in the House sorting layer.
+Put the door, in the doorway, position: 23, 8.
+
+Put the Stone in the Stone layer.
+Put the Stone sprite over the stairs to the dungeon; 23, 14.
+
+Make sure your objects, in your zelda map are lined up, so that you can't see cracks or space between objects.

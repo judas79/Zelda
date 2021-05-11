@@ -1,0 +1,161 @@
+How to Make Video Games 28 : Make Zelda 5
+https://www.youtube.com/watch?v=TKYeGEDdmSk&list=PLGLfVvz_LVvSYnwKyw9xP5tEn7GSUWwZJ&index=28
+
+As we continue making Zelda, I値l show you how to make the camera follow Link. We値l create a script that animates Link smoothly. 
+I値l show you how to handle collisions between game assets and I値l demonstrate the usefulness of tags. 
+We値l also make a Sound Manager we値l use the play all our sounds and much more.
+http://www.newthinktank.com/2017/11/make-video-games-28/
+
+Like always all of the code follows the video below. Here is a link to the sprite files used.
+http://www.newthinktank.com/16x16sprites-2/
+
+
+*********************************** add Tags *****************************************
+
+
+We will first create a bunch ot tags, for our objects.
+
+Gems
+Bush
+Boomarang
+Bomb
+Bow 
+Link
+Door
+Stone
+
+Next assign the objects to thier same name tags, but no the create object folder, they are in.
+
+
+********************************* setup Link *******************************
+
+
+Drag 16x16Sprite_53 and 16x16Sprite_54 into the hierarchy list.
+Name animation to Idle2.
+Drag the sprite 16x16Sprite_53, into the Link create object and rename to Link.
+Add the Link tag to Tags, then choose the Link tag, for Link object.
+Add Link object to Link sorting layer.
+Position x = 2
+position y = -4
+
+Next click your Animation folder, then the Animator.
+From our Animations folder, drag:
+WalkDown
+WalkRight
+WalkUp
+into our Animator.
+
+Create new int named MoveDirection by clicking + in Parameters, in Animator.
+
+(Remember we created ints 0 - 4 to define what our direction state is, in tut 26.)
+
+Create transition WalkDown and WalkRight and WalkUp to Idle2.
+Conditions, for all, MoveDirection equals 0.
+
+Create transition Idle2 to WalkDown.
+Conditions, Movement equals 4.
+
+Create transition Idle2 to WalkRight.
+Conditions, Movement equals 3.
+
+Create transition Idle2 to WalkUp.
+Conditions, Movement equals 2.
+
+Click Idle2 in Animator and change speed to .4, to slow Links animation movement down.
+Do the same for WalkDown and WalkRight and WalkUp.
+
+
+************************************* SoundManager ****************************************
+
+
+Create Empty, name it SoundManager.
+Add Component, Audio, AudioSource, to your SoundManager.
+
+Next, make a SoundManager script, and double click to Continue in  VS...
+
+After saving and returning, we will setup our CameraMove.
+
+
+************************************* Camera Move ***********************************
+
+
+First, Create a new script named CameraMove.
+
+After saving and returning to Unity
+
+We need to select the Main Camera, in our current scene, then drag our cameraMove script into it.
+
+Next, drag Link, from hierarchy into the CameraMove scripts, Camera Target field, while the Main Camera is selected.
+Inside of the same CameraMove script, in the MainCamera in the Inspector, set the following:
+Camera Speed = 2.5
+Min X = 0
+Min Y = 0
+Max X = 100
+Max Y = 100
+
+
+*********************************** setup Link2 **************************************
+
+
+First, create a new script and name it Link2.
+Then double click it, to open it in VS.
+In VS select all of the content of Link and paste it into Link2.
+We will continue in Link2 within VS by commenting out and changing, the following:
+
+change:
+public class Link : MonoBehaviour
+to:
+public class Link2 : MonoBehaviour
+
+comment out:
+
+//Gameboard gameboard;
+
+//gameboard = FindObjectOfType(typeof(Gameboard)) as Gameboard;
+
+Change
+
+// T26 if we have a valid space to move to, according to our IsValudSpace function
+        // convert its value to a float, then get Links x position and add horxMove, which is where Links'
+        // position he wants to move to, is at
+        // do the same thing for Link wanting to vertMove, then pass in both; horzMove, vertMove, to IsValudSpace()
+        if (gameboard.IsValidSpace((float)transform.position.x + horzMove, (float)transform.position.y + vertMove, horzMove, vertMove))
+        {
+            // if it is a valid place to move, move there
+            rb.velocity = new Vector2(horzMove * speed, vertMove * speed);
+        }
+        // T26 if its not a valid vector to move into, stop (0,0)
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
+
+To:
+
+
+			// if it is a valid place to move, move there
+            rb.velocity = new Vector2(horzMove * speed, vertMove * speed);
+
+Then save all and return to Unity.
+
+Select Link, in the hierarchy, then drag the Link2 script into its compnents area in Inspector.
+In the Link2 script, in the inspector area, set speed to 2.5.
+
+
+
+*********************************** Link inside NewMap scene ***********************************
+
+
+In hierarchy, in the NewMap scene, select Link, and add a rigidbody 2d to it.
+Settings:
+Mass = .0001
+Gravity Scale = 0
+collision detection = Continous
+Freeze rotation Z is checked
+
+Next, add a BoxCollider 2d to Link.
+
+We need to go into the sorting layer and drag the Tree, down below, the Link sorting layer,
+so that Link can hide behind the leaf part of the trees.
+
+I need to make the borders smaller, on the boxColiders that make up the house, and doorway.

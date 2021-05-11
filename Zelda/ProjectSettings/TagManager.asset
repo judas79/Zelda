@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Gems
+  - Bush
+  - Boomarang
+  - Bomb
+  - Bow
+  - Link
+  - Door
+  - Stone
+  - House
   layers:
   - Default
   - TransparentFX
@@ -50,9 +59,6 @@ TagManager:
   - name: Hill
     uniqueID: 1261836359
     locked: 0
-  - name: Tree
-    uniqueID: 840895913
-    locked: 0
   - name: Gem
     uniqueID: 3626461927
     locked: 0
@@ -73,4 +79,7 @@ TagManager:
     locked: 0
   - name: Link
     uniqueID: 1097240811
+    locked: 0
+  - name: Tree
+    uniqueID: 840895913
     locked: 0

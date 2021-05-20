@@ -1,0 +1,83 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Villain : MonoBehaviour
+{
+    // T29 define the villains speed, public so we can easily tweak it
+    public float speed = 2f;
+
+    // T29The villains will all start going right when loaded, and appear on screen
+    Vector2 direction = Vector2.right;
+
+    // T29 Keeps track of, if Villain is chasing Link, or not
+    // the villian will bounce back and forth between the VillainStart and VillainEnd Empty, points
+    // until a chase is initiated.
+    bool chasing = false;
+
+    // T29 Get reference to the Animator, so we can change the animations
+    private Animator animator;
+
+    // T29 we will create a Link GameObject later, but here is its reference.
+    // public so we can drag and drop the Link, into it later on in the scripts fields.
+    GameObject linkGO;
+
+    // T29 define Rigidbody 2d, to move Villain
+    Rigidbody2D rb;
+
+    // T29 initialize things, so they are setup and ready when called upon to perform
+    void Awake()
+    {
+        // get our reference to the Link Component, for our linkGO,
+        // use find to get the only Link character in the game
+        linkGO = GameObject.Find("Link");
+
+        // setup the rigidbody 2d
+        rb = GetComponent<Rigidbody2D>();
+
+        // setup the animator
+        animator = GetComponent<Animator>();
+    }
+
+    // T29 fixed update will call our rigidbody and change its velocity, on a regular basis
+    void FixedUpdate()
+    {
+        // change rigidbody2d velocity
+        rb.velocity = direction * speed;
+        //GetComponent<Rigidbody2D>().velocity = direction * speed;
+    }
+
+    // T29 handle when our Villain hits one of those triggers
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        // we hit a trigger now what
+        // find out if we where chasing  or not,
+        // if we where not chasing, and collided with the VillainStart or VillainEnd
+        // we will change the x direction our Villain is facing, by flipping it, which reacts super quick
+        if (!chasing)
+        {
+            transform.localScale = new Vector2(-1 * transform.localScale.x,
+                transform.localScale.y);
+
+            // also change the direction that we are moving in
+            direction = new Vector2(-1 * direction.x, direction.y);
+        }
+        // TODO else is for when our villain is chasing Link
+        else
+        {
+
+        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

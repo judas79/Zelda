@@ -1,0 +1,116 @@
+How to Make Video Games 29 : Make Zelda 6
+https://www.youtube.com/watch?v=FvKq2-RUkjA&list=PLGLfVvz_LVvSYnwKyw9xP5tEn7GSUWwZJ&index=30
+
+In this part of my How to Make Video Games series I will continue making a Zelda clone. I’ll create animations for the villains and animate them. 
+I’ll also cover a new way to animate Link’s sword from inside of code. 
+We’ll use coroutines to make items show and then disappear on the screen and a whole lot more.
+http://www.newthinktank.com/2017/12/make-video-games-29/
+
+
+First, change your background color in your Main Camera, to a shade of green, that looks good.
+
+
+*********************************** Create Enemies (Villains) ***************************************
+
+
+In the 16x16Sprite sheet select 16x16Sprite_0 and 16x16Sprite_1 and drag it into the scene Window.
+Save the animation, as EnemyWalkRight, into the Animations folder.
+This animation, will be used to walk left and right.
+While the 16x16Sprite_0, is selected in hierarchy, Click on Window, Animation in the main menu, 
+then open the Animation editor.
+Expand the animation editor window and also drag it down so it is over the game Play window,
+then right click its settings, the 3 dots ... and choose add tab, game to pin it next to the game play window.
+For the 16x16Sprite_0, sorting layer set to villain.
+
+Next, create empty, named Villains.
+Positions 0,0,0
+Drag 16x16Sprite_0 into Villains.
+Rename 16x16Sprite_0 to Villain.
+Position Villain 6,2
+In the animator editor, slow down the speed of the animation:
+speed = .3
+
+Next, in animation editor, make a new animation:
+choose:  Make new clip... from the drop down triangle.
+Name it EnemyWalkLeft, in the popup diagnal, and save in Animations folder.
+In the Animation editor set the number space to 2, then drag 16x16Sprite_0, in the first division,
+of the screen on the right, and 16x16Sprite_1 into the second part of the screen.
+In, animator editor, select EnemyWalkLeft, and change speed to .3.
+In, animations select villain, then flip x by checking it, so the animation will flip the EnemyWalkLeft animation.
+
+Next, do the same steps as above, using 16x16Sprite_2, and 16x16Sprite_3, and name it:
+EnemyMoveDown.  But, do not flip the x axis.
+
+Next, do the same steps as above, using 16x16Sprite_4, and name it:
+EnemyMoveUp.  But, do not flip the x axis.
+
+Next, do the same steps as above, using 16x16Sprite_2 (put it in twice), and name it:
+EnemyIdle.  But, do not flip the x axis.
+
+Next, select the Animation folder, and rename the 16x16Sprite_0 controller to Enemy.
+
+Next, click on Villain, and add a boxcollider 2d, also notice the Controller is now named Enemy.
+Change the size, of the Boxcollider 2d to:
+Size : .7 x .7
+Next, ad a rigidbody 2d, with settings:
+mass .0001
+gravity scale 0
+collision detection Continous
+freeze rotation z checked
+
+
+********************************** Villains border points and script **********************************
+
+
+Next, we will create to create empties, to set the points where the Villain will travel,
+back and forth, between.
+Name the first Empty VillainStart, and the second one, VillainEnd,
+then drag them into the Villains Empty.
+Use the picture of the cube dropdowns, to mark our VillianStart and VillainEnd empties, so we can see them.
+Since our Villain starting position is at 6,2 we will put our VillainStart positions at:
+position 4,2  
+We will put our VillainEnd position at:
+position 10,2
+
+Put Boxcolliders 2d on each of the VillianStart and VillainEnd empties.
+Set both of the Boxcollider 2ds, to the same settings.
+Size x: .5 
+Size y: .5
+and both colliders settings are also:
+is trigger = checked
+
+Next, create a script and name it Villain.  
+We, should first ask ourselves, what do we need to track, for the Villain to perfom correctly,
+double click Villain script, and we will continue in VS...
+
+After saving, and returning after getting to the else in the OnTriggerEnter2D statement,
+Drag our Villian script into out Villain, in hierarchys, settings,
+try out our Game to see if the Villain moves, back and forth.
+
+
+
+*************************************** Links Sword weapon *****************************************
+
+
+Next we will attach a Sword animation (weapon) to Link, in a new way.
+Create empty, name it Weapon, and drag it into Link. position 0,0
+Select 16x16Sprite_81 and drag it into Weapon.
+Rename it to Sword.
+Sword sorting layer = Link
+In the scene area, click the two circular arrow tool, then in the scene window, 
+drag the sword around, so that it is facing down, or do the same thing by setting.
+Rotation z = -180
+If the sword is behind link, set the 'Order in layer' the same as Links, order in layer.
+In the sword position, set it to the nearest decimal point.
+position = 1.6, -4.5
+
+When Link attacks, the sword will then show up.
+
+Next, add a Boxcollider2D to the sword.
+To make the colllider smaller set:
+offset = 0, .1
+Size = .3, .8
+
+Next, we will open the Link2 script, to make the sword show up in the right position.
+Continue there...
+
